@@ -32,7 +32,8 @@
     "prebuild": "npm run prettier:check && npm run clean",
     "build": "tsc -b src",
     "prerelease": "npm run test && npm run build",
-    "release": "standard-version -s"
+    "release": "standard-version -s",
+    "prepublish": "npm run build"
   },
   "config": {
     "commitizen": {
