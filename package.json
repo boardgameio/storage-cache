@@ -1,6 +1,6 @@
 {
   "name": "bgio-storage-cache",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "🔌 A caching layer for boardgame.io database connectors",
   "license": "MIT",
   "author": "Chris Swithinbank <swithinbank@gmail.com> (http://chrisswithinbank.net/)",
