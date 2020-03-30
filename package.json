@@ -28,7 +28,7 @@
     "coverage": "cat ./coverage/lcov.info | coveralls",
     "prettier:check": "prettier --list-different \"{src,test}/**/*.ts\"",
     "prettier:write": "prettier --write \"{src,test}/**/*.ts\"",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist .tscache",
     "prebuild": "npm run prettier:check && npm run clean",
     "build": "tsc -b src",
     "prerelease": "npm run test && npm run build",
