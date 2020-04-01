@@ -1,6 +1,6 @@
 # bgio-storage-cache
 
-[![NPM Version](https://img.shields.io/npm/v/bgio-storage-cache?logo=firebase)](https://www.npmjs.com/package/bgio-storage-cache)
+[![NPM Version](https://img.shields.io/npm/v/bgio-storage-cache)](https://www.npmjs.com/package/bgio-storage-cache)
 [![Build Status](https://travis-ci.com/delucis/bgio-storage-cache.svg?branch=latest)](https://travis-ci.com/delucis/bgio-storage-cache)
 [![Coverage Status](https://coveralls.io/repos/github/delucis/bgio-storage-cache/badge.svg?branch=latest)](https://coveralls.io/github/delucis/bgio-storage-cache?branch=latest)
 
