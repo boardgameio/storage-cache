@@ -15,7 +15,7 @@ import { Async } from 'boardgame.io/internal';
  */
 export class StorageCache extends Async {
   cache: {
-    metadata: LRU<string, Server.GameMetadata>;
+    metadata: LRU<string, Server.MatchData>;
     state: LRU<string, State>;
     initialState: LRU<string, State>;
     log: LRU<string, LogEntry[]>;
@@ -103,10 +103,7 @@ export class StorageCache extends Async {
    * @param gameID - The game id.
    * @param metadata - The game metadata to persist.
    */
-  async setMetadata(
-    gameID: string,
-    metadata: Server.GameMetadata
-  ): Promise<void> {
+  async setMetadata(gameID: string, metadata: Server.MatchData): Promise<void> {
     this.cache.metadata.set(gameID, metadata);
     await this.db.setMetadata(gameID, metadata);
   }
@@ -131,7 +128,7 @@ export class StorageCache extends Async {
       if (opts[key]) {
         const cacheValue = this.cache[key].get(gameID);
         if (cacheValue) {
-          result[key] = cacheValue as State & LogEntry[] & Server.GameMetadata;
+          result[key] = cacheValue as State & LogEntry[] & Server.MatchData;
         } else {
           fetchFromDb[key] = true;
         }
@@ -145,7 +142,7 @@ export class StorageCache extends Async {
       // handle fields that don’t need additional race condition checks
       const simpleFields = ['metadata', 'initialState', 'log'] as const;
       for (const field of simpleFields) {
-        const val = response[field] as State & LogEntry[] & Server.GameMetadata;
+        const val = response[field] as State & LogEntry[] & Server.MatchData;
         if (val) {
           this.cache[field].set(gameID, val);
           result[field] = val;

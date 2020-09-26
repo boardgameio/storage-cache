@@ -51,7 +51,7 @@ describe('StorageCache', () => {
   test('cache hit', async () => {
     // Create game.
     const initialState = ({ G: 'G', ctx: 'ctx' } as unknown) as State;
-    const metadata = { gameName: 'A' } as Server.GameMetadata;
+    const metadata = { gameName: 'A' } as Server.MatchData;
     await db.createGame('gameID', { initialState, metadata });
 
     // Must return created game.
@@ -68,7 +68,7 @@ describe('StorageCache', () => {
   test('cache miss', async () => {
     // Create game.
     const initialState = ({ G: 'G', ctx: 'ctx' } as unknown) as State;
-    const metadata = { gameName: 'A' } as Server.GameMetadata;
+    const metadata = { gameName: 'A' } as Server.MatchData;
     await db.createGame('gameID', { initialState, metadata });
 
     // Must return created game after cache reset.
@@ -123,7 +123,7 @@ describe('StorageCache', () => {
     const state = ({} as unknown) as State;
     await db.createGame(id, {
       initialState: state,
-      metadata: { gameName: 'A' } as Server.GameMetadata,
+      metadata: { gameName: 'A' } as Server.MatchData,
     });
 
     // expect log to be initialised as an empty array
@@ -174,9 +174,9 @@ describe('StorageCache', () => {
 
   test('list all entries', async () => {
     // Insert 3 entries
-    await db.setMetadata('gameID_0', { gameName: 'A' } as Server.GameMetadata);
-    await db.setMetadata('gameID_2', { gameName: 'A' } as Server.GameMetadata);
-    await db.setMetadata('gameID_1', { gameName: 'B' } as Server.GameMetadata);
+    await db.setMetadata('gameID_0', { gameName: 'A' } as Server.MatchData);
+    await db.setMetadata('gameID_2', { gameName: 'A' } as Server.MatchData);
+    await db.setMetadata('gameID_1', { gameName: 'B' } as Server.MatchData);
     const ids = await db.listGames();
     expect(ids).toContain('gameID_0');
     expect(ids).toContain('gameID_1');
@@ -185,9 +185,9 @@ describe('StorageCache', () => {
 
   // The FlatFile implementation doesn’t support filtering by game name
   test.skip('list entries for specific gameName', async () => {
-    await db.setMetadata('gameID_0', { gameName: 'A' } as Server.GameMetadata);
-    await db.setMetadata('gameID_2', { gameName: 'A' } as Server.GameMetadata);
-    await db.setMetadata('gameID_1', { gameName: 'B' } as Server.GameMetadata);
+    await db.setMetadata('gameID_0', { gameName: 'A' } as Server.MatchData);
+    await db.setMetadata('gameID_2', { gameName: 'A' } as Server.MatchData);
+    await db.setMetadata('gameID_1', { gameName: 'B' } as Server.MatchData);
     const ids = await db.listGames({ gameName: 'A' });
     expect(ids).toContain('gameID_0');
     expect(ids).toContain('gameID_2');
@@ -196,7 +196,7 @@ describe('StorageCache', () => {
 
   test('remove entry', async () => {
     const initialState = ({ G: 'G', ctx: 'ctx' } as unknown) as State;
-    const metadata = { gameName: 'A' } as Server.GameMetadata;
+    const metadata = { gameName: 'A' } as Server.MatchData;
     // Insert 2 entries
     await db.createGame('gameID_0', { initialState, metadata });
     await db.createGame('gameID_1', { initialState, metadata });
