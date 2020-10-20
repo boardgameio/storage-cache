@@ -61,15 +61,20 @@ export class StorageCache extends Async {
    * @param gameID - The game ID to key entries by.
    * @param opts - Object containing initial metadata & state objects.
    */
-  async createGame(
+  async createMatch(
     gameID: string,
-    opts: StorageAPI.CreateGameOpts
+    opts: StorageAPI.CreateMatchOpts
   ): Promise<void> {
     this.cache.metadata.set(gameID, opts.metadata);
     this.cache.state.set(gameID, opts.initialState);
     this.cache.initialState.set(gameID, opts.initialState);
     this.cache.log.set(gameID, []);
-    await this.db.createGame(gameID, opts);
+    // Use the deprecated `createGame` method if the database implements it.
+    if (this.db.createGame) {
+      await this.db.createGame(gameID, opts);
+    } else {
+      await this.db.createMatch(gameID, opts);
+    }
   }
 
   /**
@@ -195,7 +200,10 @@ export class StorageCache extends Async {
    * Return all gameIDs.
    * @returns - Array of gameIDs (strings)
    */
-  async listGames(opts?: StorageAPI.ListGamesOpts): Promise<string[]> {
-    return this.db.listGames(opts);
+  async listMatches(opts?: StorageAPI.ListMatchesOpts): Promise<string[]> {
+    // Use the deprecated `listGames` method if the database implements it.
+    return this.db.listGames
+      ? this.db.listGames(opts)
+      : this.db.listMatches(opts);
   }
 }

@@ -52,7 +52,7 @@ describe('StorageCache', () => {
     // Create game.
     const initialState = ({ G: 'G', ctx: 'ctx' } as unknown) as State;
     const metadata = { gameName: 'A' } as Server.MatchData;
-    await db.createGame('gameID', { initialState, metadata });
+    await db.createMatch('gameID', { initialState, metadata });
 
     // Must return created game.
     const data = await db.fetch('gameID', {
@@ -69,7 +69,7 @@ describe('StorageCache', () => {
     // Create game.
     const initialState = ({ G: 'G', ctx: 'ctx' } as unknown) as State;
     const metadata = { gameName: 'A' } as Server.MatchData;
-    await db.createGame('gameID', { initialState, metadata });
+    await db.createMatch('gameID', { initialState, metadata });
 
     // Must return created game after cache reset.
     db.cache.reset();
@@ -121,7 +121,7 @@ describe('StorageCache', () => {
   test('deltalog is concatenated in setState', async () => {
     const id = 'gameID';
     const state = ({} as unknown) as State;
-    await db.createGame(id, {
+    await db.createMatch(id, {
       initialState: state,
       metadata: { gameName: 'A' } as Server.MatchData,
     });
@@ -177,7 +177,7 @@ describe('StorageCache', () => {
     await db.setMetadata('gameID_0', { gameName: 'A' } as Server.MatchData);
     await db.setMetadata('gameID_2', { gameName: 'A' } as Server.MatchData);
     await db.setMetadata('gameID_1', { gameName: 'B' } as Server.MatchData);
-    const ids = await db.listGames();
+    const ids = await db.listMatches();
     expect(ids).toContain('gameID_0');
     expect(ids).toContain('gameID_1');
     expect(ids).toContain('gameID_2');
@@ -188,7 +188,7 @@ describe('StorageCache', () => {
     await db.setMetadata('gameID_0', { gameName: 'A' } as Server.MatchData);
     await db.setMetadata('gameID_2', { gameName: 'A' } as Server.MatchData);
     await db.setMetadata('gameID_1', { gameName: 'B' } as Server.MatchData);
-    const ids = await db.listGames({ gameName: 'A' });
+    const ids = await db.listMatches({ gameName: 'A' });
     expect(ids).toContain('gameID_0');
     expect(ids).toContain('gameID_2');
     expect(ids).not.toContain('gameID_1');
@@ -198,11 +198,11 @@ describe('StorageCache', () => {
     const initialState = ({ G: 'G', ctx: 'ctx' } as unknown) as State;
     const metadata = { gameName: 'A' } as Server.MatchData;
     // Insert 2 entries
-    await db.createGame('gameID_0', { initialState, metadata });
-    await db.createGame('gameID_1', { initialState, metadata });
+    await db.createMatch('gameID_0', { initialState, metadata });
+    await db.createMatch('gameID_1', { initialState, metadata });
     // Remove 1
     await db.wipe('gameID_1');
-    const games = await db.listGames();
+    const games = await db.listMatches();
     expect(games).toContain('gameID_0');
     expect(games).not.toContain('gameID_1');
     await db.wipe('gameID_1');
