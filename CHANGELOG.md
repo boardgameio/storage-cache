@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/delucis/bgio-storage-cache/compare/v0.2.1...v0.3.0) (2020-10-20)
+
+
+### ⚠ BREAKING CHANGES
+
+* Versions of boardgame.io <0.41.1 are no longer 
+supported and other uses that directly relied on calling `listGames` or 
+`createGame` will need to be updated to use the new `listMatches` and 
+`createMatch` method names.
+
+### Features
+
+* upgrade boardgame.io and handle both new and deprecated storage class methods ([5650cbe](https://github.com/delucis/bgio-storage-cache/commit/5650cbe620aa4d4bc0a26eae1f99e1ce50792ed9)), closes [#3](https://github.com/delucis/bgio-storage-cache/issues/3)
+
 ### [0.2.1](https://github.com/delucis/bgio-storage-cache/compare/v0.2.0...v0.2.1) (2020-10-20)
 
 
