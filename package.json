@@ -73,6 +73,6 @@
     "lru-cache": "^5.1.1"
   },
   "peerDependencies": {
-    "boardgame.io": ">=0.40.0 <1"
+    "boardgame.io": ">=0.40 <0.41"
   }
 }
