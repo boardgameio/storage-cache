@@ -183,8 +183,7 @@ describe('StorageCache', () => {
     expect(ids).toContain('gameID_2');
   });
 
-  // The FlatFile implementation doesn’t support filtering by game name
-  test.skip('list entries for specific gameName', async () => {
+  test('list entries for specific gameName', async () => {
     await db.setMetadata('gameID_0', { gameName: 'A' } as Server.MatchData);
     await db.setMetadata('gameID_2', { gameName: 'A' } as Server.MatchData);
     await db.setMetadata('gameID_1', { gameName: 'B' } as Server.MatchData);
