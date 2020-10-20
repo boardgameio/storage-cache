@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/delucis/bgio-storage-cache/compare/v0.2.0...v0.2.1) (2020-10-20)
+
+
+### Bug Fixes
+
+* **package:** Indicate lack of support for boardgame.io@0.41 ([e11c7d9](https://github.com/delucis/bgio-storage-cache/commit/e11c7d988b6f01a5433ce40ae0cb7711c4ff8806))
+
 ## [0.2.0](https://github.com/delucis/bgio-storage-cache/compare/v0.1.3...v0.2.0) (2020-09-26)
 
 
