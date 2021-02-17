@@ -70,7 +70,7 @@
   },
   "dependencies": {
     "@types/lru-cache": "^5.1.0",
-    "lru-cache": "^5.1.1"
+    "lru-cache": "^6.0.0"
   },
   "peerDependencies": {
     "boardgame.io": ">=0.41.1"
