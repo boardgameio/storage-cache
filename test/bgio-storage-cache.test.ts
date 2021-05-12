@@ -50,7 +50,7 @@ describe('StorageCache', () => {
 
   test('cache hit', async () => {
     // Create game.
-    const initialState = ({ G: 'G', ctx: 'ctx' } as unknown) as State;
+    const initialState = { G: 'G', ctx: 'ctx' } as unknown as State;
     const metadata = { gameName: 'A' } as Server.MatchData;
     await db.createMatch('gameID', { initialState, metadata });
 
@@ -67,7 +67,7 @@ describe('StorageCache', () => {
 
   test('cache miss', async () => {
     // Create game.
-    const initialState = ({ G: 'G', ctx: 'ctx' } as unknown) as State;
+    const initialState = { G: 'G', ctx: 'ctx' } as unknown as State;
     const metadata = { gameName: 'A' } as Server.MatchData;
     await db.createMatch('gameID', { initialState, metadata });
 
@@ -87,30 +87,30 @@ describe('StorageCache', () => {
     const flatfile = new FlatFile({ dir: directory() });
     const db = new StorageCache(flatfile, { cacheSize: 1 });
     await db.connect();
-    await db.setState('gameID', ({ a: 1 } as unknown) as State);
-    await db.setState('another', ({ b: 1 } as unknown) as State);
+    await db.setState('gameID', { a: 1 } as unknown as State);
+    await db.setState('another', { b: 1 } as unknown as State);
     expect(db.cache.state.itemCount).toBe(1);
     expect(db.cache.state.keys()).toEqual(['another']);
   });
 
   test('race conditions', async () => {
     // Out of order set calls.
-    await db.setState('gameID', ({ _stateID: 1 } as unknown) as State);
-    await db.setState('gameID', ({ _stateID: 0 } as unknown) as State);
+    await db.setState('gameID', { _stateID: 1 } as unknown as State);
+    await db.setState('gameID', { _stateID: 0 } as unknown as State);
     expect(await db.fetch('gameID', { state: true })).toEqual({
       state: { _stateID: 1 },
     });
 
     // Do not override cache on get() if it is fresher than Firebase.
-    await db.setState('gameID', ({ _stateID: 0 } as unknown) as State);
-    db.cache.state.set('gameID', ({ _stateID: 1 } as unknown) as State);
+    await db.setState('gameID', { _stateID: 0 } as unknown as State);
+    db.cache.state.set('gameID', { _stateID: 1 } as unknown as State);
     await db.fetch('gameID', { state: true });
     expect(await db.fetch('gameID', { state: true })).toEqual({
       state: { _stateID: 1 },
     });
 
     // Override if it is staler than Firebase.
-    await db.setState('gameID', ({ _stateID: 1 } as unknown) as State);
+    await db.setState('gameID', { _stateID: 1 } as unknown as State);
     db.cache.reset();
     expect(await db.fetch('gameID', { state: true })).toEqual({
       state: { _stateID: 1 },
@@ -120,7 +120,7 @@ describe('StorageCache', () => {
 
   test('deltalog is concatenated in setState', async () => {
     const id = 'gameID';
-    const state = ({} as unknown) as State;
+    const state = {} as unknown as State;
     await db.createMatch(id, {
       initialState: state,
       metadata: { gameName: 'A' } as Server.MatchData,
@@ -161,7 +161,7 @@ describe('StorageCache', () => {
 
   test('setting state will create a log if it doesn’t exist yet', async () => {
     const id = 'gameID';
-    const state = ({} as unknown) as State;
+    const state = {} as unknown as State;
     const entry = {
       action: {
         type: 'MAKE_MOVE',
@@ -194,7 +194,7 @@ describe('StorageCache', () => {
   });
 
   test('remove entry', async () => {
-    const initialState = ({ G: 'G', ctx: 'ctx' } as unknown) as State;
+    const initialState = { G: 'G', ctx: 'ctx' } as unknown as State;
     const metadata = { gameName: 'A' } as Server.MatchData;
     // Insert 2 entries
     await db.createMatch('gameID_0', { initialState, metadata });
@@ -247,7 +247,7 @@ describe('StorageCache with a deprecated database connector', () => {
 
   test('cache hit', async () => {
     // Create game.
-    const initialState = ({ G: 'G', ctx: 'ctx' } as unknown) as State;
+    const initialState = { G: 'G', ctx: 'ctx' } as unknown as State;
     const metadata = { gameName: 'A' } as Server.MatchData;
     await db.createMatch('gameID', { initialState, metadata });
 
@@ -264,7 +264,7 @@ describe('StorageCache with a deprecated database connector', () => {
 
   test('cache miss', async () => {
     // Create game.
-    const initialState = ({ G: 'G', ctx: 'ctx' } as unknown) as State;
+    const initialState = { G: 'G', ctx: 'ctx' } as unknown as State;
     const metadata = { gameName: 'A' } as Server.MatchData;
     await db.createMatch('gameID', { initialState, metadata });
 
@@ -284,30 +284,30 @@ describe('StorageCache with a deprecated database connector', () => {
     const flatfile = new FlatFile({ dir: directory() });
     const db = new StorageCache(flatfile, { cacheSize: 1 });
     await db.connect();
-    await db.setState('gameID', ({ a: 1 } as unknown) as State);
-    await db.setState('another', ({ b: 1 } as unknown) as State);
+    await db.setState('gameID', { a: 1 } as unknown as State);
+    await db.setState('another', { b: 1 } as unknown as State);
     expect(db.cache.state.itemCount).toBe(1);
     expect(db.cache.state.keys()).toEqual(['another']);
   });
 
   test('race conditions', async () => {
     // Out of order set calls.
-    await db.setState('gameID', ({ _stateID: 1 } as unknown) as State);
-    await db.setState('gameID', ({ _stateID: 0 } as unknown) as State);
+    await db.setState('gameID', { _stateID: 1 } as unknown as State);
+    await db.setState('gameID', { _stateID: 0 } as unknown as State);
     expect(await db.fetch('gameID', { state: true })).toEqual({
       state: { _stateID: 1 },
     });
 
     // Do not override cache on get() if it is fresher than Firebase.
-    await db.setState('gameID', ({ _stateID: 0 } as unknown) as State);
-    db.cache.state.set('gameID', ({ _stateID: 1 } as unknown) as State);
+    await db.setState('gameID', { _stateID: 0 } as unknown as State);
+    db.cache.state.set('gameID', { _stateID: 1 } as unknown as State);
     await db.fetch('gameID', { state: true });
     expect(await db.fetch('gameID', { state: true })).toEqual({
       state: { _stateID: 1 },
     });
 
     // Override if it is staler than Firebase.
-    await db.setState('gameID', ({ _stateID: 1 } as unknown) as State);
+    await db.setState('gameID', { _stateID: 1 } as unknown as State);
     db.cache.reset();
     expect(await db.fetch('gameID', { state: true })).toEqual({
       state: { _stateID: 1 },
@@ -317,7 +317,7 @@ describe('StorageCache with a deprecated database connector', () => {
 
   test('deltalog is concatenated in setState', async () => {
     const id = 'gameID';
-    const state = ({} as unknown) as State;
+    const state = {} as unknown as State;
     await db.createMatch(id, {
       initialState: state,
       metadata: { gameName: 'A' } as Server.MatchData,
@@ -358,7 +358,7 @@ describe('StorageCache with a deprecated database connector', () => {
 
   test('setting state will create a log if it doesn’t exist yet', async () => {
     const id = 'gameID';
-    const state = ({} as unknown) as State;
+    const state = {} as unknown as State;
     const entry = {
       action: {
         type: 'MAKE_MOVE',
@@ -392,7 +392,7 @@ describe('StorageCache with a deprecated database connector', () => {
   });
 
   test('remove entry', async () => {
-    const initialState = ({ G: 'G', ctx: 'ctx' } as unknown) as State;
+    const initialState = { G: 'G', ctx: 'ctx' } as unknown as State;
     const metadata = { gameName: 'A' } as Server.MatchData;
     // Insert 2 entries
     await db.createMatch('gameID_0', { initialState, metadata });
