@@ -47,7 +47,7 @@
     }
   },
   "devDependencies": {
-    "@types/jest": "^26.0.22",
+    "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
     "boardgame.io": "^0.44.0",
@@ -56,16 +56,16 @@
     "cz-conventional-changelog": "^3.1.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-jest": "^24.2.0",
+    "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.2.3",
-    "jest": "^25.2.4",
+    "jest": "^26.6.3",
     "node-persist": "^3.0.5",
     "prettier": "^2.0.2",
     "rimraf": "^3.0.2",
     "standard-version": "^9.0.0",
     "tempy": "^1.0.0",
-    "ts-jest": "^25.3.0",
+    "ts-jest": "^26.5.6",
     "typescript": "^3.8.3"
   },
   "dependencies": {
