@@ -17,6 +17,13 @@
     "storage",
     "cache"
   ],
+  "funding": [
+    "https://github.com/boardgameio/boardgame.io?sponsor=1",
+    {
+      "type": "opencollective",
+      "url": "https://opencollective.com/boardgameio"
+    }
+  ],
   "main": "dist/bgio-storage-cache.js",
   "types": "dist/bgio-storage-cache.d.ts",
   "files": [
