@@ -1,8 +1,8 @@
-# bgio-storage-cache
+# @boardgame.io/storage-cache
 
-[![NPM Version](https://img.shields.io/npm/v/bgio-storage-cache)](https://www.npmjs.com/package/bgio-storage-cache)
-[![Test CI Status](https://github.com/delucis/bgio-storage-cache/workflows/Test/badge.svg)](https://github.com/delucis/bgio-storage-cache/actions?query=workflow%3ATest)
-[![Coverage Status](https://coveralls.io/repos/github/delucis/bgio-storage-cache/badge.svg?branch=latest)](https://coveralls.io/github/delucis/bgio-storage-cache?branch=latest)
+[![NPM Version](https://img.shields.io/npm/v/@boardgame.io/storage-cache)](https://www.npmjs.com/package/@boardgame.io/storage-cache)
+[![Test CI Status](https://github.com/boardgameio/storage-cache/workflows/Test/badge.svg)](https://github.com/boardgameio/storage-cache/actions?query=workflow%3ATest)
+[![Coverage Status](https://coveralls.io/repos/github/boardgameio/storage-cache/badge.svg?branch=latest)](https://coveralls.io/github/boardgameio/storage-cache?branch=latest)
 
 >  🔌  A caching layer for [boardgame.io][bgio] database connectors
 
@@ -16,7 +16,7 @@ multiple processes or server instances. There are also limitations to what can b
 ## Installation
 
 ```sh
-npm install --save bgio-storage-cache
+npm install --save @boardgame.io/storage-cache
 ```
 
 
@@ -26,7 +26,7 @@ Instantiate your database class as usual and pass it to `StorageCache`. This exa
 
 ```js
 const { Server, FlatFile } = require('boardgame.io/server');
-const { StorageCache } = require('bgio-storage-cache');
+const { StorageCache } = require('@boardgame.io/storage-cache');
 const { MyGame } = require('./game');
 
 // instantiate the database class
@@ -88,7 +88,7 @@ The code in this repository is provided under [the MIT License](LICENSE).
 
 [bgio]: https://boardgame.io/
 [ffdb]: https://boardgame.io/documentation/#/storage?id=flatfile
-[async]: https://github.com/nicolodavis/boardgame.io/blob/master/src/server/db/base.ts
+[async]: https://github.com/boardgameio/boardgame.io/blob/master/src/server/db/base.ts
 [bgio-storage]: https://boardgame.io/documentation/#/storage
-[newissue]: https://github.com/delucis/bgio-storage-cache/issues/new/choose
+[newissue]: https://github.com/boardgameio/storage-cache/issues/new/choose
 [COC]: CODE_OF_CONDUCT.md

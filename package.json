@@ -1,16 +1,16 @@
 {
-  "name": "bgio-storage-cache",
+  "name": "@boardgame.io/storage-cache",
   "version": "0.3.2",
   "description": "🔌 A caching layer for boardgame.io database connectors",
   "license": "MIT",
   "author": "Chris Swithinbank <swithinbank@gmail.com> (http://chrisswithinbank.net/)",
-  "homepage": "https://github.com/delucis/bgio-storage-cache#readme",
+  "homepage": "https://github.com/boardgameio/storage-cache#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/delucis/bgio-storage-cache.git"
+    "url": "git+https://github.com/boardgameio/storage-cache.git"
   },
   "bugs": {
-    "url": "https://github.com/delucis/bgio-storage-cache/issues"
+    "url": "https://github.com/boardgameio/storage-cache/issues"
   },
   "keywords": [
     "boardgame.io",
