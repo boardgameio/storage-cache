@@ -11,6 +11,26 @@ import { FlatFile } from 'boardgame.io/server';
 import { LogEntry, Server, State, StorageAPI } from 'boardgame.io';
 import { StorageCache } from '../src/bgio-storage-cache';
 
+const sleep = (t: number): Promise<void> =>
+  new Promise((resolve) => setTimeout(resolve, t));
+
+class LaggyDb extends FlatFile {
+  private lag = 50;
+
+  constructor(...opts: ConstructorParameters<typeof FlatFile>) {
+    super(...opts);
+  }
+
+  async fetch(
+    ...args: Parameters<FlatFile['fetch']>
+  ): ReturnType<FlatFile['fetch']> {
+    await sleep(this.lag);
+    const result = await super.fetch(...args);
+    await sleep(this.lag);
+    return result;
+  }
+}
+
 describe('construction', () => {
   test('defaults', () => {
     const dbImpl = {} as StorageAPI.Async;
@@ -207,7 +227,42 @@ describe('StorageCache', () => {
     await db.wipe('gameID_1');
   });
 
-  test.todo('test race condition where cache is filled during fetch');
+  describe('race condition where cache is filled during fetch', () => {
+    const matchID = 'matchID';
+
+    beforeEach(async () => {
+      const flatfile = new LaggyDb({ dir: directory() });
+      db = new StorageCache(flatfile);
+      await db.connect();
+      await db.setState(matchID, { _stateID: 0 } as unknown as State);
+      db.cache.reset();
+    });
+
+    test('cache updated with newer state than database return', async () => {
+      // Request latest state.
+      const result = db.fetch(matchID, { state: true });
+      // Once database has resolved, but before laggy wrapper returns,
+      // advance state to a newer value.
+      await sleep(75);
+      await db.setState(matchID, { _stateID: 1 } as unknown as State);
+      // The newer cached value should be returned.
+      expect((await result).state._stateID).toBe(1);
+    });
+
+    test('cache updated with older state than database return', async () => {
+      // Advance state.
+      await db.setState(matchID, { _stateID: 2 } as unknown as State);
+      db.cache.reset();
+      // Request latest state.
+      const result = db.fetch(matchID, { state: true });
+      // Once database has resolved, but before laggy wrapper returns,
+      // erroneously set state to an older value.
+      await sleep(75);
+      await db.setState(matchID, { _stateID: 1 } as unknown as State);
+      // The newer database value should still be returned.
+      expect((await result).state._stateID).toBe(2);
+    });
+  });
 });
 
 describe('StorageCache with a deprecated database connector', () => {
@@ -404,6 +459,4 @@ describe('StorageCache with a deprecated database connector', () => {
     expect(games).not.toContain('gameID_1');
     await db.wipe('gameID_1');
   });
-
-  test.todo('test race condition where cache is filled during fetch');
 });
