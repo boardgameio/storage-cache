@@ -1,6 +1,6 @@
 {
   "name": "@boardgame.io/storage-cache",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "🔌 A caching layer for boardgame.io database connectors",
   "license": "MIT",
   "author": "Chris Swithinbank <swithinbank@gmail.com> (http://chrisswithinbank.net/)",
