@@ -1,2 +1,3 @@
 #!/bin/sh
-npm run prettier:check && npm run test
+npm run prettier:check
+npm run test
