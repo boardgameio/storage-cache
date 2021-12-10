@@ -30,6 +30,7 @@
     "dist/*"
   ],
   "scripts": {
+    "prepare": "husky install",
     "pretest": "eslint \"{src,test}/**/*.{ts,js}\"",
     "test": "jest --coverage",
     "coverage": "cat ./coverage/lcov.info | coveralls",
