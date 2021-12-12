@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/boardgameio/storage-cache/compare/v0.3.3...v0.4.0) (2021-12-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* Node 10 is no longer officially supported. The package itself has not changed, so
+should continue to work in Node 10, but we aren’t testing against 10 anymore, so that may break at
+any time from now on without notice.
+
+### ci
+
+* drop Node 10 & 15, add Node 16 ([695d789](https://github.com/boardgameio/storage-cache/commit/695d789f199e107041dd8c901834c8b640e57865))
+
 ### [0.3.3](https://github.com/boardgameio/storage-cache/compare/v0.3.2...v0.3.3) (2021-11-19)
 
 ### [0.3.2](https://github.com/boardgameio/storage-cache/compare/v0.3.1...v0.3.2) (2021-08-03)
