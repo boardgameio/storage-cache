@@ -41,10 +41,10 @@ export class StorageCache extends Async {
       initialState: new LRU({ max: cacheSize }),
       log: new LRU({ max: cacheSize }),
       reset: (): void => {
-        this.cache.metadata.reset();
-        this.cache.state.reset();
-        this.cache.initialState.reset();
-        this.cache.log.reset();
+        this.cache.metadata.clear();
+        this.cache.state.clear();
+        this.cache.initialState.clear();
+        this.cache.log.clear();
       },
     };
   }
@@ -190,10 +190,10 @@ export class StorageCache extends Async {
    */
   async wipe(gameID: string): Promise<void> {
     await this.db.wipe(gameID);
-    this.cache.metadata.del(gameID);
-    this.cache.state.del(gameID);
-    this.cache.initialState.del(gameID);
-    this.cache.log.del(gameID);
+    this.cache.metadata.delete(gameID);
+    this.cache.state.delete(gameID);
+    this.cache.initialState.delete(gameID);
+    this.cache.log.delete(gameID);
   }
 
   /**
