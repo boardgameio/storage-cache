@@ -109,8 +109,8 @@ describe('StorageCache', () => {
     await db.connect();
     await db.setState('gameID', { a: 1 } as unknown as State);
     await db.setState('another', { b: 1 } as unknown as State);
-    expect(db.cache.state.itemCount).toBe(1);
-    expect(db.cache.state.keys()).toEqual(['another']);
+    expect(db.cache.state.size).toBe(1);
+    expect([...db.cache.state.keys()]).toEqual(['another']);
   });
 
   test('race conditions', async () => {
@@ -341,8 +341,8 @@ describe('StorageCache with a deprecated database connector', () => {
     await db.connect();
     await db.setState('gameID', { a: 1 } as unknown as State);
     await db.setState('another', { b: 1 } as unknown as State);
-    expect(db.cache.state.itemCount).toBe(1);
-    expect(db.cache.state.keys()).toEqual(['another']);
+    expect(db.cache.state.size).toBe(1);
+    expect([...db.cache.state.keys()]).toEqual(['another']);
   });
 
   test('race conditions', async () => {
