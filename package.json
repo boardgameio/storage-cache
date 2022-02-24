@@ -69,8 +69,8 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
-    "@types/lru-cache": "^5.1.0",
-    "lru-cache": "^6.0.0"
+    "@types/lru-cache": "^7.4.0",
+    "lru-cache": "^7.4.0"
   },
   "peerDependencies": {
     "boardgame.io": ">=0.41.1"
